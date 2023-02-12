@@ -44,9 +44,17 @@ foreach ($rows as $row) {
     ];
 }
 
+function validate($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data); 
+    return $data;
+}
+
 if(isset($_GET['limit']))
 {
-    $limit = array_slice($arr, 0, $_GET['limit']);
+    $limit = array_slice($arr, 0, validate($_GET['limit']));
 
     die(json_encode(array(
         "status" => true,
